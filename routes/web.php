@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +19,21 @@ use App\Http\Controllers\ClientController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/*
 
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+Route::get('/', [HomeController::class, 'index']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/book/{id}', [BookController::class, 'show'])->name('book.show');
+Route::get('/author/{id}', [AuthorController::class, 'show'])->name('author.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
