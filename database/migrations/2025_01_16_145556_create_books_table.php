@@ -15,7 +15,7 @@ class CreateBooksTable extends Migration
             $table->foreignId('author_id')->nullable()->constrained('authors')->onDelete('cascade');
             $table->decimal('price', 8, 2);
             $table->integer('stock');
-            $table->foreignId('category_id')->constrained('categories');
+            //$table->foreignId('category_id')->constrained('categories');
             $table->text('description')->nullable();
             $table->timestamps();
         });

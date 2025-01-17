@@ -9,9 +9,10 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        Category::create(['name' => 'Historia']);
-        Category::create(['name' => 'Fantasy']);
-        Category::create(['name' => 'Kryminał']);
+        $categories = ['Historia', 'Fantasy', 'Kryminał', 'Nauka', 'Biografia', 'Thriller', 'Powieść'];
+        foreach ($categories as $category) {
+            \App\Models\Category::create(['name' => $category]);
+        }
     }
 }
 

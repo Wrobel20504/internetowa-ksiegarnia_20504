@@ -10,6 +10,7 @@ class AuthorSeeder extends Seeder
 {
     public function run(): void
     {
+        /*
         // Tworzenie autorów
         $author1 = Author::create([
             'name' => 'Jan Kowalski',
@@ -25,6 +26,8 @@ class AuthorSeeder extends Seeder
             'name' => 'Piotr Wiśniewski',
             'biography' => 'Znany pisarz książek kryminalnych.',
         ]);
+*/
+        Author::factory(20)->create(); // Tworzy 20 autorów
 
 
     }

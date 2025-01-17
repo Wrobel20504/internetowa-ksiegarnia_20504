@@ -7,19 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa; /* Jasny szary */
+            background-color: #f8f9fa;
         }
         .navbar {
-            background-color: #007bff; /* Niebieski */
+            background-color: #007bff;
         }
         .navbar-brand, .nav-link {
             color: #fff !important;
-        }
-        .card {
-            border: 1px solid #007bff;
-        }
-        .card-title {
-            color: #007bff;
         }
         .footer {
             background-color: #007bff;
@@ -34,10 +28,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">Księgarnia</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto">
                 @guest
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Logowanie</a></li>
@@ -55,9 +46,13 @@
         </div>
     </div>
 </nav>
+
 <div class="container mt-4">
+
     @yield('content')
+
 </div>
+
 <footer class="footer">
     <div class="container">
         <p>&copy; {{ date('Y') }} Księgarnia Internetowa. Wszystkie prawa zastrzeżone.</p>

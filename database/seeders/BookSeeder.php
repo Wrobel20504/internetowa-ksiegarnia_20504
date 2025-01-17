@@ -5,11 +5,13 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
 use App\Models\Author;
+use App\Models\Category;
 
 class BookSeeder extends Seeder
 {
     public function run(): void
     {
+        /*
         // Pobranie autorów z bazy danych
         $author1 = Author::where('name', 'Jan Kowalski')->first();
         $author2 = Author::where('name', 'Anna Nowak')->first();
@@ -55,5 +57,19 @@ class BookSeeder extends Seeder
             'category_id' => 3,
             'author_id' => $author3->id,
         ]);
+        */
+        $categories = Category::all();
+        $authors = Author::all();
+
+        Book::factory(50)->create()->each(function ($book) use ($categories, $authors) {
+            // Przypisz losowego autora
+            $book->author_id = $authors->random()->id;
+            $book->save();
+
+            // Przypisz losowe kategorie (od 1 do 3 na książkę)
+            $book->categories()->attach(
+                $categories->random(rand(1, 3))->pluck('id')->toArray()
+            );
+        });
     }
 }
