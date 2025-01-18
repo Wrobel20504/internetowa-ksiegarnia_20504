@@ -22,6 +22,33 @@
             text-align: center;
             margin-top: 20px;
         }
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            font-weight: bold;
+        }
+
+        .form-label {
+            font-size: 14px;
+            color: #495057;
+        }
+        .sidebar {
+            position: absolute;
+            top: 70px; /* Odstęp od góry, np. od paska nawigacji */
+            left: 0;
+            width: 250px; /* Szerokość panelu bocznego */
+            background-color: #ffffff; /* Kolor tła */
+            border-right: 1px solid #ddd; /* Linia oddzielająca */
+            padding: 20px;
+            overflow-y: auto; /* Dodaj przewijanie, jeśli zawartość jest za długa */
+        }
+
+        .main-content {
+            margin-left: 270px; /* Margines, aby uwzględnić szerokość panelu bocznego */
+            padding: 20px;
+        }
     </style>
 </head>
 <body>

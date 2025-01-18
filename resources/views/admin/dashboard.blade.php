@@ -3,16 +3,19 @@
 @section('title', 'Panel Administratora')
 
 @section('content')
-    <h1>Panel Administratora</h1>
-
-    <form method="GET" action="{{ url('/admin') }}" class="mb-4">
-        <div class="row g-2">
-            <div class="col-md-4">
-                <input type="text" name="search" class="form-control" placeholder="Szukaj po tytule lub autorze" value="{{ request('search') }}">
+    <div class="sidebar">
+        <h5>Filtry i sortowanie</h5>
+        <form method="GET" action="{{ url('/admin') }}">
+            <!-- Wyszukiwanie tytułu i autora -->
+            <div class="mb-3">
+                <label for="search" class="form-label">Szukaj</label>
+                <input type="text" id="search" name="search" class="form-control" placeholder="Tytuł lub autor" value="{{ request('search') }}">
             </div>
-            <div class="col-md-4">
-                <select name="categories[]" class="form-select" multiple>
-                    <option disabled>Filtruj po kategoriach</option>
+
+            <!-- Filtr kategorii -->
+            <div class="mb-3">
+                <label for="categories" class="form-label">Kategorie</label>
+                <select id="categories" name="categories[]" class="form-select" multiple>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ in_array($category->id, (array)request('categories', [])) ? 'selected' : '' }}>
                             {{ $category->name }}
@@ -20,18 +23,26 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-2">
-                <select name="sort_by" class="form-select">
-                    <option value="">Sortuj</option>
+
+            <!-- Sortowanie -->
+            <div class="mb-3">
+                <label for="sort_by" class="form-label">Sortuj według</label>
+                <select id="sort_by" name="sort_by" class="form-select">
+                    <option value="">Wybierz</option>
                     <option value="title" {{ request('sort_by') === 'title' ? 'selected' : '' }}>Tytuł</option>
                     <option value="author" {{ request('sort_by') === 'author' ? 'selected' : '' }}>Autor</option>
                 </select>
             </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Szukaj</button>
+
+            <!-- Przycisk wyszukiwania -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Zastosuj</button>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
+    <h1>Panel Administratora</h1>
+
 
     <div class="row">
         @foreach ($books as $book)

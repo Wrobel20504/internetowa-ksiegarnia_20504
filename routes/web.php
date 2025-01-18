@@ -8,7 +8,9 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
-
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Employee\EmployeeOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +47,25 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/employee', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
     Route::get('/client', [ClientController::class, 'dashboard'])->name('client.dashboard');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::post('/orders/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
+    Route::post('/orders/{order}/delete', [OrderController::class, 'delete'])->name('orders.delete');
+});
+Route::prefix('employee')->middleware(['auth'])->group(function () {
+    Route::get('/', [EmployeeOrderController::class, 'index'])->name('employee.dashboard');
+
+    // Trasy zarządzania zamówieniami
+    Route::get('/orders', [EmployeeOrderController::class, 'index'])->name('employee.orders.index');
+    Route::get('/orders/{order}/edit', [EmployeeOrderController::class, 'edit'])->name('employee.orders.edit');
+    Route::post('/orders/{order}', [EmployeeOrderController::class, 'update'])->name('employee.orders.update');
+    Route::get('/orders/{order}/details', [EmployeeOrderController::class, 'details'])->name('employee.orders.details');
+    Route::post('/orders/{order}/delete', [EmployeeOrderController::class, 'delete'])->name('employee.orders.delete');
+
 });
 
 require __DIR__.'/auth.php';
