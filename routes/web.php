@@ -11,6 +11,10 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Employee\EmployeeOrderController;
+use App\Http\Controllers\Admin\AdminAdminController;
+use App\Http\Controllers\Admin\AdminAuthorController;
+use App\Http\Controllers\Admin\AdminBookController;
+use App\Http\Controllers\Admin\AdminUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +69,23 @@ Route::prefix('employee')->middleware(['auth'])->group(function () {
     Route::post('/orders/{order}', [EmployeeOrderController::class, 'update'])->name('employee.orders.update');
     Route::get('/orders/{order}/details', [EmployeeOrderController::class, 'details'])->name('employee.orders.details');
     Route::post('/orders/{order}/delete', [EmployeeOrderController::class, 'delete'])->name('employee.orders.delete');
+
+});
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/', [AdminAdminController::class, 'index'])->name('admin.dashboard');
+
+    // Zarządzanie autorami
+    Route::resource('authors', AdminAuthorController::class);
+
+    // Zarządzanie książkami
+    Route::resource('books', AdminBookController::class);
+
+    // Zarządzanie użytkownikami
+    Route::resource('users', AdminUserController::class);
+    Route::get('/authors/{author}', [AdminAuthorController::class, 'show'])->name('authors.show');
+    Route::get('/books/{book}', [AdminBookController::class, 'show'])->name('books.show');
+    Route::get('/users/{user}', [AdminUserController::class, 'show'])->name('users.show');
 
 });
 
