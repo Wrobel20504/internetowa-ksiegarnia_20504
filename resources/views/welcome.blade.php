@@ -8,7 +8,7 @@
     @auth
         <div class="text-center mb-4">
             @if (Auth::user()->role === 'admin')
-                <a href="{{ url('/admin') }}" class="btn btn-primary">Przejdź do panelu administratora</a>
+                <a href="{{ url('/admin') }}" class="btn btn-primary" >Przejdź do panelu administratora</a>
             @elseif (Auth::user()->role === 'employee')
                 <a href="{{ url('/employee') }}" class="btn btn-success">Przejdź do panelu pracownika</a>
             @else
